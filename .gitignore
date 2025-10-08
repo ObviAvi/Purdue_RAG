@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets & env
+.env
+*.env
+secrets.json
+credentials.json
+
+# Data (do NOT commit large dataset files)
+data/
+reddit_posts.json
+*.pkl
+*.npz
+
+# Chroma / vector DB local folder (if used)
+chroma_db/
+chromadb_storage/
+
+# logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
