@@ -73,19 +73,18 @@ def retrieve_context(query):
 def chat_with_rag(query):
     print("🗣️ Query received:", query)
     context = retrieve_context(query)
-    prompt = f"""Act as a student at Purdue University. 
+    prompt = f"""
+                Act as a student at Purdue University. 
                 Use your experience and the following Reddit Q&A context to answer the question. 
                 Do not mention Reddit or the source explicitly and do not mention that you are a student.
                 Keep your answers detailed but not too long.
 
-Context:
-{context}
+                Context: {context}
+                Question: {query}
+                """
 
-Question: {query}
-Answer:"""
     response = chat_client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
     return response.text
-
 
 # =========================
 # FASTAPI SETUP

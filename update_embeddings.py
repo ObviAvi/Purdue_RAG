@@ -65,4 +65,4 @@ for i in range(0, len(post_chunks), batch_size):
         ids=batch_ids,
     )
 
-print(f"✅ Embeddings updated and stored in persistent ChromaDB ({len(collection.get()['ids'])} entries).")
+print(f"Embeddings updated and stored in persistent ChromaDB ({len(collection.get()['ids'])} entries).")
