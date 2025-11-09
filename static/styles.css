@@ -1,0 +1,333 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --color-bg-dark: #1a1f36; /* Main background */
+    --color-bg-card: #2c324b; /* Card/Bubble/Input background */
+    --color-primary: #6d28d9; /* Vibrant Purple/Accent color */
+    --color-secondary-purple: #5b21b6; /* Deep Purple for logos/subtle accents */
+    --color-text-light: #ffffff; /* Main white text */
+    --color-text-subtle: #a0a0a0; /* Subdued grey text */
+    --color-border-subtle: #3a3f5a; /* Separator lines/borders */
+    --border-radius-card: 10px;
+    --border-radius-pill: 25px;
+}
+
+body {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    font-family: 'Arial', sans-serif; /* Use a common font */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Main App Container (Simulates Phone Screen) --- */
+.app-screen {
+    width: 600px; /* Typical mobile width */
+    height: 900px; /* Typical mobile height */
+    background-color: var(--color-bg-dark);
+    border-radius: 40px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-card);
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding: 20px;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--color-text-light);
+}
+
+.back-icon {
+    color: var(--color-text-light);
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* --- Welcome Screen (Screen 1) --- */
+.welcome-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.logo-circle {
+    width: 140px;
+    height: 140px;
+    background-color: var(--color-secondary-purple);
+    border-radius: 50%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Placeholder for the swirl icon */
+    font-size: 3em;
+}
+
+.welcome-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.welcome-subtitle {
+    font-size: 1em;
+    color: var(--color-text-subtle);
+    margin-bottom: 50px;
+}
+
+/* --- Shared Button Styles --- */
+.button-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 15px 30px;
+    border-radius: var(--border-radius-pill);
+    border: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    width: 85%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+.button-primary:hover {
+    background-color: #5b1dcc;
+}
+
+/* --- AI Assistants Screen (Screen 2) --- */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+
+.tab-button {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-subtle);
+    padding: 8px 18px;
+    border-radius: var(--border-radius-pill);
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.tab-button.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-weight: bold;
+}
+
+.assistant-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 0 20px 20px;
+    overflow-y: auto;
+}
+
+.assistant-card {
+    background-color: var(--color-bg-card);
+    border-radius: var(--border-radius-card);
+    padding: 15px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-secondary-purple);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+    font-size: 1.2em; /* For the quote icon */
+}
+
+.card-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-description {
+    font-size: 0.85em;
+    color: var(--color-text-subtle);
+}
+
+/* --- Chat Screen (Screen 3) --- */
+.messages-container {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 18px;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.message.ai {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-light);
+    border-radius: 18px 18px 18px 4px; /* AI bubble shape */
+    align-self: flex-start;
+}
+
+.message.user {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: 18px 18px 4px 18px; /* User bubble shape */
+    align-self: flex-end;
+}
+
+/* --- Quick Message Suggestions (Screen 3, below messages) --- */
+.quick-message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.quick-message-item {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-pill);
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.quick-message-icon {
+    margin-right: 10px;
+}
+
+/* --- Chat Input Area (Screen 3) --- */
+.input-area {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--color-bg-card);
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.text-input {
+    flex-grow: 1;
+    background-color: var(--color-border-subtle);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius-pill);
+    padding: 12px 18px;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.text-input::placeholder {
+    color: var(--color-text-subtle);
+}
+
+.send-button {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2em; /* For the send icon */
+}
+
+/* --- Bottom Navigation Bar --- */
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    background-color: var(--color-bg-card);
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.nav-icon {
+    font-size: 1.5em;
+    color: var(--color-text-subtle);
+    margin-bottom: 3px;
+}
+
+.nav-text {
+    font-size: 0.75em;
+    color: var(--color-text-subtle);
+    font-weight: 600;
+}
+
+.nav-item.active .nav-icon,
+.nav-item.active .nav-text {
+    color: var(--color-primary);
+}
+
+/* --- Scrollbar Styling --- */
+.messages-container::-webkit-scrollbar {
+    width: 20px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+    background: var(--color-bg-dark);
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    border: 2px solid var(--color-bg-dark);
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-secondary-purple);
+}
+
+/* Firefox support */
+.messages-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-bg-dark);
+}

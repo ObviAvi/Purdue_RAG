@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purdue RAG Chatbot</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app-screen">
+    <div class="header">
+      <div class="header-title">Purdue Student Chatbot</div>
+    </div>
+
+    <div id="chat-box" class="messages-container"></div>
+
+    <div class="input-area">
+      <input
+        id="query"
+        class="text-input"
+        type="text"
+        placeholder="Ask something about Purdue..."
+      />
+      <button class="send-button" onclick="sendQuery()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    async function sendQuery() {
+      const queryInput = document.getElementById("query");
+      const chatBox = document.getElementById("chat-box");
+      const query = queryInput.value.trim();
+      if (!query) return;
+
+      // User message
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.textContent = query;
+      chatBox.appendChild(userMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      queryInput.value = "";
+
+      // Fetch response
+      try {
+        const res = await fetch("http://localhost:3000/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        });
+        const data = await res.json();
+
+        const botMsg = document.createElement("div");
+        botMsg.className = "message ai";
+        botMsg.innerHTML = (data.answer || "Sorry, something went wrong.")
+          .replace(/\*\*\*(.*?)\*\*\*/g, "<b><i>$1</i></b>")   // ***bold italic***
+          .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")               // **bold**
+          .replace(/\*(.*?)\*/g, "<i>$1</i>");                  // *italic*
+        chatBox.appendChild(botMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      } catch (err) {
+        const botMsg = document.createElement("div");
+        botMsg.className = "message ai";
+        botMsg.textContent = "Error: Unable to reach server.";
+        chatBox.appendChild(botMsg);
+      }
+    }
+
+    // Enter key support
+    document.getElementById("query").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendQuery();
+    });
+  </script>
+</body>
+</html>
