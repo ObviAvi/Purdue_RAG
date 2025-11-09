@@ -12,10 +12,10 @@ This project implements an end-to-end Retrieval-Augmented Generation (RAG) syste
 
 **Architecture Flow**
 
-1. **Scraper (`scraper.py`)** – Extracts text content, headings, and metadata from company websites.
-2. **Embedding Generator (`generate_embeddings.py`)** – Converts the scraped data into vector embeddings using SentenceTransformers. The embeddings are stored in a local file or vector database.
-3. **Frontend (`index.html`)** – A simple HTML/JS interface that sends a query to the backend and displays relevant results.
-4. **Backend (`app.py`)** – A lightweight FastAPI or Flask server that receives frontend queries, retrieves semantically similar chunks using embeddings, and returns the results.
+1. **Scraper (`redditscraper.py`)** – Extracts text content, headings, and metadata from the purdue subreddit.
+2. **Embedding Generator (`update_embeddings.py`)** – Converts the scraped data into vector embeddings using SentenceTransformers. The embeddings are stored in a ChromaDB vector database for use when querying.
+3. **Frontend (`index.html` and `syles.css`)** – A simple HTML/JS interface that sends a query to the backend and displays relevant results.
+4. **Backend (`purdue_rag_chatbot.py`)** – A lightweight FastAPI or Flask server that receives frontend queries, retrieves semantically similar chunks using embeddings, and returns the results.
 
 ---
 
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 ### 2. Scrape Manufacturing Websites
 
-Edit `scraper.py` to include the URLs you want to crawl, then run:
+Edit `redditscraper.py` to include the subreddit you want to crawl, then run:
 
 ```bash
 python scraper.py
@@ -44,17 +44,17 @@ Output json files will appear in root folder.
 Once text data is ready, generate embeddings with:
 
 ```bash
-python generate_embeddings.py
+python update_embeddings.py
 ```
 
-This creates a `.pkl` or `.json` file in `data/embeddings/` containing the text chunks and their vector representations.
+This creates a Chroma folder containing the text chunks and their vector representations.
 
 ### 4. Start the Backend
 
 Run the RAG server (Flask or FastAPI):
 
 ```bash
-python app.py
+python purdue_rag_chatbot.py
 ```
 
 By default, it runs on `http://127.0.0.1:8000`.
@@ -65,7 +65,7 @@ Simply open `index.html` in your browser.
 If you’re running a local server, make sure it points to the correct backend endpoint, e.g.:
 
 ```javascript
-fetch('http://127.0.0.1:8000/query', {...})
+fetch('http://127.0.0.1:3000/query', {...})
 ```
 
 ---
